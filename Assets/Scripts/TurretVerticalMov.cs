@@ -1,24 +1,34 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class TurretVerticalMov : MonoBehaviour
 {
-    public float speed = 1;
-    InputSystem_Actions input;
+    public GameObject torso;
+    public GameObject body;
+
+
+    public float sensivity = 1f;
+
+    public DeltaControl delta { get; protected set; }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        input = new InputSystem_Actions();
-        input.Enable();
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        Vector2 delta = Mouse.current.delta.ReadValue();
 
-        float x = Input.GetAxis("Mouse X");
-        float y = Input.GetAxis("Mouse Y");
-        Vector3 dir =input.Player.Move.ReadValue<Vector2>();
+        float mouseX = delta.x;
+        float mouseY = delta.y;
 
-        transform.position = transform.position += dir * Time.deltaTime * speed;
+        torso.transform.localEulerAngles = (torso.transform.localEulerAngles + new Vector3(0, mouseX, mouseY) * sensivity);
+        body.transform.localEulerAngles = (body.transform.localEulerAngles + new Vector3(0, mouseX, 0) * sensivity);
+
     }
 }
