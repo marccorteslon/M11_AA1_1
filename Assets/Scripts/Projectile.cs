@@ -9,11 +9,24 @@ public class Projectile : MonoBehaviour
     public float force = 100;
     //We reserve the required memory to use the rigidbody
     Rigidbody rb;
+
+    GameObject target;
+
     void Start()
     {
+        //Esto ya lo he hecho en el Script ObjectLauncher
+
         //We search for the RigidBody component on the current object (the projectile)
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
         //Using the rigidbody we add a force on its forward direction
-        rb.AddForce(transform.forward * force, ForceMode.Impulse);
+        //rb.AddForce(transform.forward * force, ForceMode.Impulse);
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Target")) {
+            Debug.Log("Colisión");
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,11 @@ public class ObjectLauncher : MonoBehaviour
 {
     //We save here the original object that we want to duplicate
     public GameObject prefab;
+
+    public GameObject boquilla;
+
+    public int shootPower = 2;
+
     //How far the object should appear
     public float positionOffset = 2;
     //We reserve the required memory to use the input manager
@@ -18,7 +24,7 @@ public class ObjectLauncher : MonoBehaviour
         input.Player.Enable();
     }
     void Update()
-    {
+    { 
         //We check if the Interact key was pressed this frame or not. If it does, we duplicate the object into the scene
         if (input.Player.Interact.WasPressedThisFrame())
         {
@@ -26,8 +32,17 @@ public class ObjectLauncher : MonoBehaviour
             //The object to duplicate
             //The position where the duplicated object must be put on
             //The rotation on wich the duplicated object will appear
-            GameObject instance = Instantiate(prefab, transform.position + transform.forward * positionOffset, transform.rotation);
+
+            //GameObject instance = Instantiate(prefab, boquilla.transform.position + boquilla.transform.forward * positionOffset, transform.rotation);
+
+            GameObject instance = Instantiate(prefab, boquilla.transform.position + boquilla.transform.forward * 0, boquilla.transform.rotation);
+
+            Rigidbody rb = instance.GetComponent<Rigidbody>();
+
+            rb.AddForce(boquilla.transform.forward * shootPower);
+
             //The Instantiate function always returns the duplicated object, and we can save it to access the new object later on
         }
+
     }
 }
