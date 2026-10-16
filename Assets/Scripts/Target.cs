@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class Target : MonoBehaviour
 {
@@ -6,15 +7,19 @@ public class Target : MonoBehaviour
     public GameObject targetFix;
     public GameObject targetBreak;
 
+    public TextMeshProUGUI texto;
+
     float counter = 0;
     float maxCounter = 3;
+
+    int points = 0;
 
     bool broken = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        Respawn();
     }
 
     // Update is called once per frame
@@ -27,17 +32,24 @@ public class Target : MonoBehaviour
             {
                 Respawn();
                 broken = false;
-                counter = 3;
+                counter = 0;
             }
         }
+        Debug.Log(counter);
+
+        texto.text = points.ToString();
     }
 
     void ShootedAt()
     {
-        Debug.Log("Destroyed");
-        GameObject instance = Instantiate(targetBreak, transform.position + transform.forward * 0, transform.rotation);
-        Destroy(targetFix);
-        broken = true;
+        if (!broken)
+        {
+            Debug.Log("Destroyed");
+            GameObject instance = Instantiate(targetBreak, transform.position + transform.forward * 0, transform.rotation);
+            Destroy(targetFix);
+            broken = true;
+            points += 100;
+        }
     }
 
     void Respawn()

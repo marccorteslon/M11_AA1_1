@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2750bdce5293d1b47836920d7fc69d04, type: 3}
       propertyPath: m_Name
-      value: Target
+      value: Obj_Target
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2750bdce5293d1b47836920d7fc69d04, type: 3}
       propertyPath: m_TagString
@@ -136,4 +136,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4fc47f58af31c74c9e5a7cb2bdf1afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Target
-  prefab: {fileID: 8616858779769105868, guid: 02988f7a11aa2c34a9cd4386adcd332d, type: 3}
+  targetFix: {fileID: 3503277486241095101, guid: dfe35e2025c74fd42a633c3645da52d2, type: 3}
+  targetBreak: {fileID: 8616858779769105868, guid: 02988f7a11aa2c34a9cd4386adcd332d, type: 3}

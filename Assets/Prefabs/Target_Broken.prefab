@@ -56,6 +56,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 088b4deee35c46d45baf16e8fab65362, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2434208488642544335}
     - targetCorrespondingSourceObject: {fileID: -7736467440555216149, guid: 088b4deee35c46d45baf16e8fab65362, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2646613094430033906}
@@ -5787,6 +5790,23 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6410577993258076609, guid: 088b4deee35c46d45baf16e8fab65362, type: 3}
+--- !u!1 &8616858779769105868 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 088b4deee35c46d45baf16e8fab65362, type: 3}
+  m_PrefabInstance: {fileID: 8886818906679464093}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-2434208488642544335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616858779769105868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44bd8efc5cd14cd4e9cd54a8c3662f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoDestroy
 --- !u!1 &8700664055646823104 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8941152234011594147, guid: 088b4deee35c46d45baf16e8fab65362, type: 3}
