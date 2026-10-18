@@ -12,7 +12,9 @@ public class Target : MonoBehaviour
     float counter = 0;
     float maxCounter = 3;
 
-    int points = 0;
+    public int points = 0;
+
+    public int pointsToAdd = 0;
 
     bool broken = false;
 
@@ -35,8 +37,6 @@ public class Target : MonoBehaviour
                 counter = 0;
             }
         }
-        Debug.Log(counter);
-
         texto.text = points.ToString();
     }
 
@@ -48,7 +48,7 @@ public class Target : MonoBehaviour
             GameObject instance = Instantiate(targetBreak, transform.position + transform.forward * 0, transform.rotation);
             Destroy(targetFix);
             broken = true;
-            points += 100;
+            points += pointsToAdd;
         }
     }
 
