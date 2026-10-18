@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 
 public class Target : MonoBehaviour
 {
@@ -7,26 +6,39 @@ public class Target : MonoBehaviour
     public GameObject targetFix;
     public GameObject targetBreak;
 
-    public TextMeshProUGUI texto;
+    private GameObject currentTarget;
 
     float counter = 0;
     float maxCounter = 3;
 
-    public int points = 0;
-
-    public int pointsToAdd = 0;
+    float counterMovement = 0;
+    float maxCounterMovement = 3;
 
     bool broken = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Puntuación
+    public PointsManager manager;
+
+    public int pointsToAdd = 0;
+
+    //Movimiento
+    public float moveSpeed = 0f;
+
+    bool movingLeft = false;
+
+    public bool canMove = false;
+
+
+    // Start
     void Start()
     {
         Respawn();
     }
 
-    // Update is called once per frame
+    // Update
     void Update()
     {
+        // Destruir
         if (broken)
         {
             counter += Time.deltaTime;
@@ -37,27 +49,86 @@ public class Target : MonoBehaviour
                 counter = 0;
             }
         }
-        texto.text = points.ToString();
+
+        // Movimiento
+        if (canMove)
+        {
+            if (movingLeft)
+            {
+                counterMovement += Time.deltaTime;
+                MoveRight();
+
+                if (counterMovement >= maxCounterMovement)
+                {
+                    movingLeft = false;
+                    counterMovement = 0;
+                }
+            }
+            else
+            {
+                counterMovement += Time.deltaTime;
+                MoveLeft();
+
+                if (counterMovement >= maxCounterMovement)
+                {
+                    movingLeft = true;
+                    counterMovement = 0;
+                }
+            }
+        }
+
+        // Mover las instancias junto con el padre
+        currentTarget.transform.position = transform.position;
     }
 
+
+    // Funciones para movier a la izquierda y a la derecha
+    void MoveRight()
+    {
+        transform.position += new Vector3(0f, 0f, moveSpeed * Time.deltaTime);
+    }
+
+    void MoveLeft()
+    {
+        transform.position += new Vector3(0f, 0f, -moveSpeed * Time.deltaTime);
+    }
+
+
+    // Lo que pasa al ser chocado
     void ShootedAt()
     {
         if (!broken)
         {
+            if (currentTarget != null)
+            {
+                Destroy(currentTarget);
+            }
+
             Debug.Log("Destroyed");
-            GameObject instance = Instantiate(targetBreak, transform.position + transform.forward * 0, transform.rotation);
-            Destroy(targetFix);
+            currentTarget = Instantiate(targetBreak, transform.position + transform.forward * 0, transform.rotation);
             broken = true;
-            points += pointsToAdd;
+            counter = 0;
+            manager.points += pointsToAdd;
         }
     }
 
+
+    // Volver a aparecer
     void Respawn()
     {
-        Destroy(targetBreak);
-        GameObject instance = Instantiate(targetFix, transform.position + transform.forward * 0, transform.rotation);
+        if (currentTarget != null)
+        {
+            Destroy(currentTarget);
+        }
+
+        currentTarget = Instantiate(targetFix, transform.position + transform.forward * 0, transform.rotation);
+
+        broken = false;
+        counter = 0f;
     }
 
+
+    // Detectar colisión
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Bullet"))

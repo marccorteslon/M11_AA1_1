@@ -9,13 +9,22 @@ public class MovingTarget : MonoBehaviour
     float counter = 0;
     float maxCounter = 3;
 
-    int points = 0;
+    float counterMovement = 0;
+    float maxCounterMovement = 3;
+
+    bool broken = false;
+
+    // Puntuación
+    public PointsManager manager;
 
     public int pointsToAdd = 0;
 
+    //Movimiento
     public float moveSpeed = 0f;
 
     bool movingLeft = false;
+
+    public bool canMove = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,7 +57,6 @@ public class MovingTarget : MonoBehaviour
                 counter = 0;
             }
         }
-
     }
 
     // Funciones para movier a la izquierda y a la derecha
@@ -66,7 +74,7 @@ public class MovingTarget : MonoBehaviour
     void ShootedAt()
     {
         Debug.Log("Bad target");
-        target.points += pointsToAdd;
+        manager.points += pointsToAdd;
     }
 
 
